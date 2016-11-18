@@ -2,17 +2,13 @@ import subprocess
 import time
 import os
 
-stdout='test.out'
+out = 'out'
+fout = open(out, 'w')
+subprocess.call(['./timeout.exe', '1', './main'], stdout=fout)
+fout.close()
 
-def test(f):
-    out = 'out'
-    fout = open(out, 'w')
-    subprocess.call([f], stdout=fout)
-    fout.close()
+fin = open(out, 'r')
+print(fin.read())
+fin.close()
+os.unlink(out)
 
-    fin = open(out, 'r')
-    print(fin.read())
-    fin.close()
-    os.unlink(out)
-
-test('./main')
