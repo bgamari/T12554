@@ -1,13 +1,18 @@
 import subprocess
 import time
+import os
 
 stdout='test.out'
 
 def test(f):
-    fout = open(f, 'w')
+    out = 'out'
+    fout = open(out, 'w')
     subprocess.call([f], stdout=fout)
-    print fout.read()
     fout.close()
-    os.unlink(f)
+
+    fin = open(out, 'r')
+    print(fin.read())
+    fin.close()
+    os.unlink(out)
 
 test('./main')
